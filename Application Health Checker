@@ -1,0 +1,30 @@
+import requests
+import logging
+from datetime import datetime
+
+# Set up logging to log to a file
+logging.basicConfig(filename="app_health.log", level=logging.INFO, format="%(asctime)s - %(message)s")
+
+# Application URL to be checked
+APpli_URL = "http://your_application_url_here.com"
+
+def check_application_health():
+    try:
+        # Send an HTTP GET request to the application
+        response = requests.get(APP_URL)
+
+        # Check if the status code is 200 (OK)
+        if response.status_code == 200:
+            logging.info(f"Application is healthy. Status Code: {response.status_code}")
+            print(f"[{datetime.now()}] Application is healthy. Status Code: {response.status_code}")
+        else:
+            logging.warning(f"Application might be down. Status Code: {response.status_code}")
+            print(f"[{datetime.now()}] Application might be down. Status Code: {response.status_code}")
+
+    except requests.exceptions.RequestException as e:
+        # Catch network-related errors and log them
+        logging.error(f"Failed to reach application: {e}")
+        print(f"[{datetime.now()}] Failed to reach application: {e}")
+
+if __name__ == "__main__":
+    check_application_health()
