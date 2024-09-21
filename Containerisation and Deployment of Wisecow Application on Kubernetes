@@ -1,0 +1,45 @@
+-- Create Database for Wisecow
+CREATE DATABASE wisecow_db;
+
+-- Use the new database
+USE DATABASE wisecow_db;
+
+-- Create a table to store some application data, for example, users
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    Email Id  VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert some sample data
+INSERT INTO users (username, Email Id)
+VALUES
+('wisecow_admin', 'admin@wisecow.com'),
+('john_doe', 'john@example.com'),
+('jane_smith', 'jane@example.com');
+
+-- Query the table and retrieve all users 
+SELECT * FROM users;
+--For Inserting new User
+INSERT INTO users (username, Email Id)
+VALUES ('new_user', 'newuser@example.com');
+--Update Users info 
+UPDATE users
+SET Email Id= 'newemail@example.com'
+WHERE username = 'new_user';
+--If the wisecow app needs to Log events or activities
+CREATE TABLE logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    log_message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert log
+INSERT INTO logs (log_message)
+VALUES ('User john_doe logged in.');
+
+-- Query logs
+SELECT * FROM logs;
+
+
